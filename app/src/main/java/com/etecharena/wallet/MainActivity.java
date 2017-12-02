@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.etecharena.wallet.helpers.PreferenceHelper;
-import com.etecharena.wallet.utils.PreferenceUtil;
 
 public class MainActivity extends AppCompatActivity {
 
