@@ -1,4 +1,4 @@
-package com.etecharena.wallet;
+package com.etecharena.wallet.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
