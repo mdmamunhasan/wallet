@@ -1,4 +1,4 @@
-package com.etecharena.wallet.data;
+package com.etecharena.wallet.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,10 +8,10 @@ import android.preference.PreferenceManager;
  * Created by mamun on 12/2/17.
  */
 
-public class LocalStorage {
+public class PreferenceUtil {
     private SharedPreferences sharedPref;
 
-    LocalStorage(Context context) {
+    public PreferenceUtil(Context context) {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

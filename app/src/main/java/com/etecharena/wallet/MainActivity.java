@@ -12,13 +12,16 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.etecharena.wallet.helpers.PreferenceHelper;
+import com.etecharena.wallet.utils.PreferenceUtil;
+
 public class MainActivity extends AppCompatActivity {
 
+    private PreferenceHelper localStorage;
     private UserLoginTask mAuthTask = null;
 
     // UI references.
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        localStorage = PreferenceHelper.onInstance(this);
 
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
@@ -161,17 +166,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            String userEmail = localStorage.getUserEmail();
+            String userPassword = localStorage.getUserPassword();
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+            if (userEmail == null) {
+                localStorage.saveUserEmail(mEmail);
+                localStorage.saveUserPassword(mPassword);
+                return true;
             }
 
-            // TODO: register the new account here.
-            return true;
+            if (mEmail.equals(userEmail) && mPassword.equals(userPassword)) {
+                return true;
+            }
+
+            return false;
         }
 
         @Override
