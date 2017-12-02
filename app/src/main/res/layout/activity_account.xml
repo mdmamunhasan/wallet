@@ -22,12 +22,6 @@
 
     <include layout="@layout/content_account" />
 
-    <fragment android:name="com.etecharena.wallet.fragments.AddNewFragment"
-        android:id="@+id/add_new_fragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
