@@ -21,7 +21,10 @@ import android.widget.TextView;
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.fragments.DatePickerFragment;
 
+import java.text.DateFormat;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
@@ -87,7 +90,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
         // Store values at the time of the login attempt.
         Integer type = mTypeView.getSelectedItemPosition();
-        String date = mDateView.getText().toString();
+        String dateStr = mDateView.getText().toString();
         String title = mTitleView.getText().toString();
         String amount = mAmountView.getText().toString();
 
@@ -113,13 +116,22 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         }
 
         // Check for a valid date.
-        if (TextUtils.isEmpty(date)) {
+        if (TextUtils.isEmpty(dateStr)) {
             mDateView.setError(getString(R.string.error_field_required));
             focusView = mDateView;
             cancel = true;
-        } else if (!isDateValid(date)) {
+        } else if (!isDateValid(dateStr)) {
             mDateView.setError(getString(R.string.error_invalid_date));
             focusView = mDateView;
+            cancel = true;
+        }
+
+        Date date = Calendar.getInstance().getTime();
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            date = (Date) formatter.parse(dateStr);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
             cancel = true;
         }
 
@@ -181,28 +193,28 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
     @Override
     public void onDateSet(Date date) {
-        SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = simpleDate.format(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(date);
         mDateView.setText(strDate);
     }
 
     public class ItemSaveTask extends AsyncTask<Void, Void, Boolean> {
 
         private final Integer mType;
-        private final String mDate;
+        private final Long mDate;
         private final String mTitle;
         private final Integer mAmount;
 
-        ItemSaveTask(Integer type, String date, String title, String amount) {
+        ItemSaveTask(Integer type, Date date, String title, String amount) {
             mType = type;
-            mDate = date;
+            mDate = date.getTime();
             mTitle = title;
             mAmount = Integer.parseInt(amount);
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            Log.d("mType", mAmount.toString());
+            Log.d("date", mDate.toString());
 
             return false;
         }
