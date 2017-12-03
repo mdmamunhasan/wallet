@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.fragments.DatePickerFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
@@ -61,6 +62,9 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
                 saveItem();
             }
         });
+
+        mItemFormView = findViewById(R.id.item_form);
+        mProgressView = findViewById(R.id.save_progress);
     }
 
     public void showDatePickerDialog(View v) {
@@ -87,9 +91,13 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         View focusView = null;
 
         // Check for a valid amount, if the user entered one.
-        if (!TextUtils.isEmpty(amount) && !isAmountValid(amount)) {
-            mAmountView.setError(getString(R.string.error_invalid_amount));
+        if (TextUtils.isEmpty(amount)) {
+            mAmountView.setError(getString(R.string.error_field_required));
             focusView = mAmountView;
+            cancel = true;
+        } else if (!isAmountValid(amount)) {
+            mDateView.setError(getString(R.string.error_invalid_amount));
+            focusView = mDateView;
             cancel = true;
         }
 
@@ -101,7 +109,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         }
 
         // Check for a valid date.
-        if (TextUtils.isEmpty(title)) {
+        if (TextUtils.isEmpty(date)) {
             mDateView.setError(getString(R.string.error_field_required));
             focusView = mDateView;
             cancel = true;
@@ -169,7 +177,9 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
     @Override
     public void onDateSet(Date date) {
-        Log.d("Date", "date");
+        SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = simpleDate.format(date);
+        mDateView.setText(strDate);
     }
 
     public class ItemSaveTask extends AsyncTask<Void, Void, Boolean> {
