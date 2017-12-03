@@ -106,7 +106,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             focusView = mDateView;
             cancel = true;
         } else if (!isDateValid(date)) {
-            mDateView.setError(getString(R.string.error_invalid_email));
+            mDateView.setError(getString(R.string.error_invalid_date));
             focusView = mDateView;
             cancel = true;
         }
