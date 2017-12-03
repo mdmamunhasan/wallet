@@ -43,11 +43,22 @@
                 android:entries="@array/amount_type_array"
                 android:prompt="@string/prompt_amount_type" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_pick_date"
-                android:onClick="showDatePickerDialog" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pick_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_pick_title"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="date"
+                    android:focusableInTouchMode="false"
+                    android:onClick="showDatePickerDialog" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
