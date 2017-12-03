@@ -86,7 +86,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         mAmountView.setError(null);
 
         // Store values at the time of the login attempt.
-        String type = mTypeView.getSelectedItem().toString();
+        Integer type = mTypeView.getSelectedItemPosition();
         String date = mDateView.getText().toString();
         String title = mTitleView.getText().toString();
         String amount = mAmountView.getText().toString();
@@ -188,21 +188,21 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
     public class ItemSaveTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mType;
+        private final Integer mType;
         private final String mDate;
         private final String mTitle;
-        private final String mAmount;
+        private final Integer mAmount;
 
-        ItemSaveTask(String type, String date, String title, String amount) {
+        ItemSaveTask(Integer type, String date, String title, String amount) {
             mType = type;
             mDate = date;
             mTitle = title;
-            mAmount = amount;
+            mAmount = Integer.parseInt(amount);
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            Log.d("mType", mType);
+            Log.d("mType", mAmount.toString());
 
             return false;
         }
