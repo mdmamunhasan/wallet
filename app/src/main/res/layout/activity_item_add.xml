@@ -87,7 +87,7 @@
                     android:imeActionId="6"
                     android:imeActionLabel="@string/prompt_item_value"
                     android:imeOptions="actionUnspecified"
-                    android:inputType="textAutoCorrect"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:singleLine="true" />
 

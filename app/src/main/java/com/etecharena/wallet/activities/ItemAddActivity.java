@@ -3,9 +3,12 @@ package com.etecharena.wallet.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,7 +24,10 @@ import java.util.Date;
 
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
 
+    private ItemSaveTask mSaveTask = null;
+
     // UI references.
+    private EditText mDateView;
     private EditText mTitleView;
     private EditText mAmountView;
     private View mProgressView;
@@ -33,6 +39,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         setContentView(R.layout.activity_item_add);
 
         // Set up the login form.
+        mDateView = (EditText) findViewById(R.id.pick_date);
         mTitleView = (EditText) findViewById(R.id.title);
 
         mAmountView = (EditText) findViewById(R.id.amount);
@@ -62,7 +69,69 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
     }
 
     public void saveItem() {
-        Log.d("Save", "save");
+        if (mSaveTask != null) {
+            return;
+        }
+
+        // Reset errors.
+        mDateView.setError(null);
+        mTitleView.setError(null);
+        mAmountView.setError(null);
+
+        // Store values at the time of the login attempt.
+        String date = mDateView.getText().toString();
+        String title = mTitleView.getText().toString();
+        String amount = mAmountView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid amount, if the user entered one.
+        if (!TextUtils.isEmpty(amount) && !isAmountValid(amount)) {
+            mAmountView.setError(getString(R.string.error_invalid_amount));
+            focusView = mAmountView;
+            cancel = true;
+        }
+
+        // Check for a valid title.
+        if (TextUtils.isEmpty(title)) {
+            mTitleView.setError(getString(R.string.error_field_required));
+            focusView = mTitleView;
+            cancel = true;
+        }
+
+        // Check for a valid date.
+        if (TextUtils.isEmpty(title)) {
+            mDateView.setError(getString(R.string.error_field_required));
+            focusView = mDateView;
+            cancel = true;
+        } else if (!isDateValid(date)) {
+            mDateView.setError(getString(R.string.error_invalid_email));
+            focusView = mDateView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            showProgress(true);
+            mSaveTask = new ItemSaveTask(date, title, amount);
+            mSaveTask.execute((Void) null);
+        }
+    }
+
+    private boolean isDateValid(String date) {
+        //TODO: Replace this with your own logic
+        return date.contains("/");
+    }
+
+    private boolean isAmountValid(String amount) {
+        //TODO: Replace this with your own logic
+        return Integer.parseInt(amount) > 0;
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -101,5 +170,44 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
     @Override
     public void onDateSet(Date date) {
         Log.d("Date", "date");
+    }
+
+    public class ItemSaveTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String mDate;
+        private final String mTitle;
+        private final String mAmount;
+
+        ItemSaveTask(String date, String title, String amount) {
+            mDate = date;
+            mTitle = title;
+            mAmount = amount;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mSaveTask = null;
+            showProgress(false);
+
+            if (success) {
+                finish();
+                Intent accountPage = new Intent(ItemAddActivity.this, AccountActivity.class);
+                startActivity(accountPage);
+            } else {
+                mAmountView.setError(getString(R.string.error_invalid_amount));
+                mAmountView.requestFocus();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mSaveTask = null;
+            showProgress(false);
+        }
     }
 }
