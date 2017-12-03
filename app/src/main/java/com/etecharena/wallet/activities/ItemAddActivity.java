@@ -96,8 +96,8 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             focusView = mAmountView;
             cancel = true;
         } else if (!isAmountValid(amount)) {
-            mDateView.setError(getString(R.string.error_invalid_amount));
-            focusView = mDateView;
+            mAmountView.setError(getString(R.string.error_invalid_amount));
+            focusView = mAmountView;
             cancel = true;
         }
 
@@ -196,7 +196,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return false;
+            return true;
         }
 
         @Override
