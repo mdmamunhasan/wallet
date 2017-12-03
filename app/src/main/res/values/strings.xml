@@ -12,6 +12,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_invalid_amount">Amount must be greater than zero</string>
+    <string name="error_invalid_date">Date format must be DD/MM/YYYY</string>
     <string name="error_field_required">This field is required</string>
     <string name="prompt_item_type">Type</string>
     <string name="prompt_item_title">Title</string>
@@ -19,6 +20,7 @@
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>
     <string name="prompt_pick_title">Pick date</string>
+    <string name="prompt_amount">Amount</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
