@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.etecharena.wallet.R;
@@ -28,6 +29,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
     private ItemSaveTask mSaveTask = null;
 
     // UI references.
+    private Spinner mTypeView;
     private EditText mDateView;
     private EditText mTitleView;
     private EditText mAmountView;
@@ -40,6 +42,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         setContentView(R.layout.activity_item_add);
 
         // Set up the login form.
+        mTypeView = (Spinner) findViewById(R.id.amount_type);
         mDateView = (EditText) findViewById(R.id.pick_date);
         mTitleView = (EditText) findViewById(R.id.title);
 
@@ -83,6 +86,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         mAmountView.setError(null);
 
         // Store values at the time of the login attempt.
+        String type = mTypeView.getSelectedItem().toString();
         String date = mDateView.getText().toString();
         String title = mTitleView.getText().toString();
         String amount = mAmountView.getText().toString();
@@ -127,7 +131,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mSaveTask = new ItemSaveTask(date, title, amount);
+            mSaveTask = new ItemSaveTask(type, date, title, amount);
             mSaveTask.execute((Void) null);
         }
     }
@@ -184,11 +188,13 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
     public class ItemSaveTask extends AsyncTask<Void, Void, Boolean> {
 
+        private final String mType;
         private final String mDate;
         private final String mTitle;
         private final String mAmount;
 
-        ItemSaveTask(String date, String title, String amount) {
+        ItemSaveTask(String type, String date, String title, String amount) {
+            mType = type;
             mDate = date;
             mTitle = title;
             mAmount = amount;
@@ -196,7 +202,9 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return true;
+            Log.d("mType", mType);
+
+            return false;
         }
 
         @Override
