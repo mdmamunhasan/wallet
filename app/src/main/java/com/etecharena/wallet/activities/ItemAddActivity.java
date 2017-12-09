@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.fragments.DatePickerFragment;
 import com.etecharena.wallet.helpers.DatabaseHelper;
+import com.etecharena.wallet.models.AccountTransactionModel;
 
 import java.text.DateFormat;
 import java.text.ParsePosition;
@@ -31,8 +32,8 @@ import java.util.Date;
 
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
 
-    private SQLiteDatabase db;
     private ItemSaveTask mSaveTask = null;
+    public SQLiteDatabase db;
 
     // UI references.
     private Spinner mTypeView;
@@ -226,6 +227,15 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         @Override
         protected Boolean doInBackground(Void... params) {
             Log.d("date", mDate.toString());
+
+            AccountTransactionModel transactionModel = new AccountTransactionModel(db);
+
+            long newRowId = transactionModel.putData(mTitle, mType, mAmount, mDate);
+
+            if (newRowId > 0) {
+                Log.d("newRowId", "value = " + newRowId);
+                return true;
+            }
 
             return false;
         }

@@ -19,12 +19,12 @@ public class AccountTransactionModel {
 
     private SQLiteDatabase db;
 
-    AccountTransactionModel(SQLiteDatabase database) {
+    public AccountTransactionModel(SQLiteDatabase database) {
         // Gets the data repository in write mode
         db = database;
     }
 
-    public void putData(String title, Integer type, Integer amount, Integer timestamp) {
+    public Long putData(String title, Integer type, Integer amount, Long timestamp) {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, title);
@@ -34,7 +34,8 @@ public class AccountTransactionModel {
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(WalletContract.AccountTransaction.TABLE_NAME, null, values);
-        Log.d("newRowId", "value = " + newRowId);
+
+        return newRowId;
     }
 
     public void getData() {
