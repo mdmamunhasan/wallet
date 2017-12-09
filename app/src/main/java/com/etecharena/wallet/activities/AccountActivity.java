@@ -1,16 +1,24 @@
 package com.etecharena.wallet.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.fragments.ItemDialogFragment;
+import com.etecharena.wallet.helpers.DatabaseHelper;
+import com.etecharena.wallet.models.AccountTransactionModel;
 
 public class AccountActivity extends AppCompatActivity {
+
+    public SQLiteDatabase db;
+    public AccountTransactionModel transactionModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,16 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(accountPage);
             }
         });
+
+        db = new DatabaseHelper(this).getWritableDatabase();
+        transactionModel = new AccountTransactionModel(db);
+        showData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();
     }
 
     public void showItemDialog() {
@@ -35,4 +53,13 @@ public class AccountActivity extends AppCompatActivity {
         itemDialog.show(getSupportFragmentManager(), "updateItem");
     }
 
+    public void showData() {
+        Cursor res = transactionModel.getData();
+        if (res.getCount() > 0) {
+            res.moveToNext();
+            Log.d("Read", res.getString(1));
+        } else {
+            Log.d("Read", "No Data Found");
+        }
+    }
 }
