@@ -38,13 +38,15 @@ public class AccountTransactionModel {
         return newRowId;
     }
 
-    public void getData() {
+    public Cursor getData() {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
                 WalletContract.AccountTransaction._ID,
                 WalletContract.AccountTransaction.COLUMN_NAME_TITLE,
-                WalletContract.AccountTransaction.COLUMN_NAME_TYPE
+                WalletContract.AccountTransaction.COLUMN_NAME_TYPE,
+                WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT,
+                WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP
         };
 
         // Filter results WHERE "title" = 'My Title'
@@ -64,6 +66,8 @@ public class AccountTransactionModel {
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
+
+        return cursor;
     }
 
     public void updateData(String title) {
