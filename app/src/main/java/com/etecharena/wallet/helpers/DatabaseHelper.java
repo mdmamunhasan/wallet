@@ -16,15 +16,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "wallet.db";
 
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + WalletContract.AccountEntry.TABLE_NAME + " (" +
-                    WalletContract.AccountEntry._ID + " INTEGER PRIMARY KEY," +
-                    WalletContract.AccountEntry.COLUMN_NAME_TITLE + " TEXT," +
-                    WalletContract.AccountEntry.COLUMN_NAME_TYPE + " INTEGER," +
-                    WalletContract.AccountEntry.COLUMN_NAME_AMOUNT + " INTEGER," +
-                    WalletContract.AccountEntry.COLUMN_NAME_TIMESTAMP + " INTEGER)";
+            "CREATE TABLE " + WalletContract.AccountTransaction.TABLE_NAME + " (" +
+                    WalletContract.AccountTransaction._ID + " INTEGER PRIMARY KEY," +
+                    WalletContract.AccountTransaction.COLUMN_NAME_TITLE + " TEXT," +
+                    WalletContract.AccountTransaction.COLUMN_NAME_TYPE + " INTEGER," +
+                    WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT + " INTEGER," +
+                    WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP + " INTEGER)";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + WalletContract.AccountEntry.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + WalletContract.AccountTransaction.TABLE_NAME;
 
 
     public DatabaseHelper(Context context) {

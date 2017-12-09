@@ -11,8 +11,8 @@ public class WalletContract {
     }
 
     /* Inner class that defines the table contents */
-    public static class AccountEntry implements BaseColumns {
-        public static final String TABLE_NAME = "entry";
+    public static class AccountTransaction implements BaseColumns {
+        public static final String TABLE_NAME = "transactions";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_TYPE = "type";
         public static final String COLUMN_NAME_AMOUNT = "amount";
