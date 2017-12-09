@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.fragments.DatePickerFragment;
+import com.etecharena.wallet.helpers.DatabaseHelper;
 
 import java.text.DateFormat;
 import java.text.ParsePosition;
@@ -29,6 +31,7 @@ import java.util.Date;
 
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
 
+    private SQLiteDatabase db;
     private ItemSaveTask mSaveTask = null;
 
     // UI references.
@@ -43,6 +46,8 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_add);
+
+        db = new DatabaseHelper(this).getWritableDatabase();
 
         // Set up the login form.
         mTypeView = (Spinner) findViewById(R.id.amount_type);
@@ -71,6 +76,12 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
         mItemFormView = findViewById(R.id.item_form);
         mProgressView = findViewById(R.id.save_progress);
+    }
+
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();
     }
 
     public void showDatePickerDialog(View v) {

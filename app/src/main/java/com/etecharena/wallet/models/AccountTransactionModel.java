@@ -16,9 +16,9 @@ public class AccountTransactionModel {
 
     private SQLiteDatabase db;
 
-    AccountTransactionModel(Context context) {
+    AccountTransactionModel(SQLiteDatabase database) {
         // Gets the data repository in write mode
-        db = new DatabaseHelper(context).getWritableDatabase();
+        db = database;
     }
 
     public void putData(String type, String title) {
