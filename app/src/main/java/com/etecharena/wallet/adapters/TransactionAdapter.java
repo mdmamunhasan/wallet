@@ -1,45 +1,48 @@
 package com.etecharena.wallet.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
+
+import com.etecharena.wallet.R;
 
 /**
  * Created by mamun on 12/9/17.
  */
 
-public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionVH> implements Filterable {
+public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
-    @Override
-    public TransactionVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    private String[] mDataset;
+
+    public TransactionAdapter(String[] myDataset) {
+        mDataset = myDataset;
     }
 
     @Override
-    public void onBindViewHolder(TransactionVH holder, int position) {
+    public TransactionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_transaction_card, parent, false));
+    }
 
+    @Override
+    public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position) {
+        holder.mTextView.setText(mDataset[position]);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mDataset.length;
     }
 
-    @Override
-    public Filter getFilter() {
-        return null;
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView mTextView;
 
-    public class TransactionVH extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TransactionVH(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-        }
-
-        @Override
-        public void onClick(View view) {
-
+            mTextView = (TextView) itemView.findViewById(R.id.transaction_title);
         }
     }
 }
