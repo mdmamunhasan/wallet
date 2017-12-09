@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.etecharena.wallet.contracts.AccountContract;
+import com.etecharena.wallet.contracts.WalletContract;
 
 /**
  * Created by mamun on 12/9/17.
@@ -16,13 +16,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "wallet.db";
 
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + AccountContract.AccountEntry.TABLE_NAME + " (" +
-                    AccountContract.AccountEntry._ID + " INTEGER PRIMARY KEY," +
-                    AccountContract.AccountEntry.COLUMN_NAME_TITLE + " TEXT," +
-                    AccountContract.AccountEntry.COLUMN_NAME_SUBTITLE + " TEXT)";
+            "CREATE TABLE " + WalletContract.AccountEntry.TABLE_NAME + " (" +
+                    WalletContract.AccountEntry._ID + " INTEGER PRIMARY KEY," +
+                    WalletContract.AccountEntry.COLUMN_NAME_TITLE + " TEXT," +
+                    WalletContract.AccountEntry.COLUMN_NAME_TYPE + " INTEGER," +
+                    WalletContract.AccountEntry.COLUMN_NAME_AMOUNT + " INTEGER," +
+                    WalletContract.AccountEntry.COLUMN_NAME_TIMESTAMP + " INTEGER)";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + AccountContract.AccountEntry.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + WalletContract.AccountEntry.TABLE_NAME;
 
 
     public DatabaseHelper(Context context) {
