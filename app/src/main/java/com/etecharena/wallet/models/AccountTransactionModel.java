@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.etecharena.wallet.contracts.WalletContract;
 import com.etecharena.wallet.helpers.DatabaseHelper;
+
+import java.util.Objects;
 
 /**
  * Created by mamun on 12/9/17.
@@ -21,14 +24,17 @@ public class AccountTransactionModel {
         db = database;
     }
 
-    public void putData(String type, String title) {
+    public void putData(String title, Integer type, Integer amount, Integer timestamp) {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, title);
         values.put(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, type);
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT, amount);
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP, type);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(WalletContract.AccountTransaction.TABLE_NAME, null, values);
+        Log.d("newRowId", "value = " + newRowId);
     }
 
     public void getData() {
