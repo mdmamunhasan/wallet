@@ -50,12 +50,12 @@ public class AccountTransactionModel {
         };
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = WalletContract.AccountTransaction.COLUMN_NAME_TITLE + " = ?";
-        String[] selectionArgs = {"My Title"};
+        String selection = WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP + " > ?";
+        String[] selectionArgs = {"0"};
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                WalletContract.AccountTransaction.COLUMN_NAME_TYPE + " DESC";
+                WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP + " DESC";
 
         Cursor cursor = db.query(
                 WalletContract.AccountTransaction.TABLE_NAME,                     // The table to query
