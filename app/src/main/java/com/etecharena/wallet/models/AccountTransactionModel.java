@@ -71,14 +71,10 @@ public class AccountTransactionModel {
 
         List<AccountTransactionEntity> entities = new ArrayList<AccountTransactionEntity>();
 
-        if (cursor.getCount() > 0) {
-            cursor.moveToNext();
+        while (cursor.moveToNext()) {
             AccountTransactionEntity entity = new AccountTransactionEntity();
             entity.setTitle(cursor.getString(1));
             entities.add(entity);
-            Log.d("Read", entity.getTitle());
-        } else {
-            Log.d("Read", "No Data Found");
         }
 
         return entities;
