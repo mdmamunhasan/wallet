@@ -40,7 +40,7 @@ public class AccountTransactionModel {
         return newRowId;
     }
 
-    public List<AccountTransactionEntity> getData() {
+    public List<AccountTransactionEntity> getList() {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {

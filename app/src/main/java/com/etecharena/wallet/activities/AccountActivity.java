@@ -74,7 +74,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void showData() {
-        List<AccountTransactionEntity> mDataSet = transactionModel.getData();
+        List<AccountTransactionEntity> mDataSet = transactionModel.getList();
         // specify an adapter (see also next example)
         mAdapter = new TransactionAdapter(mDataSet);
         mRecyclerView.setAdapter(mAdapter);
