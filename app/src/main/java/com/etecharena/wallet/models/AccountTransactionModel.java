@@ -1,17 +1,13 @@
 package com.etecharena.wallet.models;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.etecharena.wallet.contracts.WalletContract;
-import com.etecharena.wallet.helpers.DatabaseHelper;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.ArrayList;
 
 /**
  * Created by mamun on 12/9/17.
