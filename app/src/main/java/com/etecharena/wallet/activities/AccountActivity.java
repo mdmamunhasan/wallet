@@ -16,7 +16,11 @@ import com.etecharena.wallet.R;
 import com.etecharena.wallet.adapters.TransactionAdapter;
 import com.etecharena.wallet.fragments.ItemDialogFragment;
 import com.etecharena.wallet.helpers.DatabaseHelper;
+import com.etecharena.wallet.models.AccountTransactionEntity;
 import com.etecharena.wallet.models.AccountTransactionModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -70,16 +74,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void showData() {
-        String[] mDataSet = {"Hello", "Good"};
-        Cursor res = transactionModel.getData();
-        if (res.getCount() > 0) {
-            res.moveToNext();
-            String title = res.getString(1);
-            Log.d("Read", title);
-        } else {
-            Log.d("Read", "No Data Found");
-        }
-
+        List<AccountTransactionEntity> mDataSet = transactionModel.getData();
         // specify an adapter (see also next example)
         mAdapter = new TransactionAdapter(mDataSet);
         mRecyclerView.setAdapter(mAdapter);

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.fragments.DatePickerFragment;
 import com.etecharena.wallet.helpers.DatabaseHelper;
+import com.etecharena.wallet.models.AccountTransactionEntity;
 import com.etecharena.wallet.models.AccountTransactionModel;
 
 import java.text.DateFormat;
@@ -228,9 +229,14 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         protected Boolean doInBackground(Void... params) {
             Log.d("date", mDate.toString());
 
-            AccountTransactionModel transactionModel = new AccountTransactionModel(db);
+            AccountTransactionEntity transactionEntity = new AccountTransactionEntity();
+            transactionEntity.setTitle(mTitle);
+            transactionEntity.setType(mType);
+            transactionEntity.setAmount(mAmount);
+            transactionEntity.setTimestamp(mDate);
 
-            long newRowId = transactionModel.putData(mTitle, mType, mAmount, mDate);
+            AccountTransactionModel transactionModel = new AccountTransactionModel(db);
+            long newRowId = transactionModel.putData(transactionEntity);
 
             if (newRowId > 0) {
                 Log.d("newRowId", "value = " + newRowId);

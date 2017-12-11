@@ -9,6 +9,10 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.etecharena.wallet.R;
+import com.etecharena.wallet.models.AccountTransactionEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mamun on 12/9/17.
@@ -16,9 +20,9 @@ import com.etecharena.wallet.R;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
-    private String[] mDataset;
+    private List<AccountTransactionEntity> mDataset;
 
-    public TransactionAdapter(String[] myDataset) {
+    public TransactionAdapter(List<AccountTransactionEntity> myDataset) {
         mDataset = myDataset;
     }
 
@@ -29,12 +33,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText(mDataset.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

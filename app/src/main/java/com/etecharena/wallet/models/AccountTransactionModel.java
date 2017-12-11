@@ -9,6 +9,8 @@ import android.util.Log;
 import com.etecharena.wallet.contracts.WalletContract;
 import com.etecharena.wallet.helpers.DatabaseHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -24,13 +26,13 @@ public class AccountTransactionModel {
         db = database;
     }
 
-    public Long putData(String title, Integer type, Integer amount, Long timestamp) {
+    public Long putData(AccountTransactionEntity entity) {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, title);
-        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, type);
-        values.put(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT, amount);
-        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP, type);
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, entity.getTitle());
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, entity.getType());
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT, entity.getAmount());
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP, entity.getTimestamp());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(WalletContract.AccountTransaction.TABLE_NAME, null, values);
@@ -38,7 +40,7 @@ public class AccountTransactionModel {
         return newRowId;
     }
 
-    public Cursor getData() {
+    public List<AccountTransactionEntity> getData() {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
@@ -67,7 +69,19 @@ public class AccountTransactionModel {
                 sortOrder                                 // The sort order
         );
 
-        return cursor;
+        List<AccountTransactionEntity> entities = new ArrayList<AccountTransactionEntity>();
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext();
+            AccountTransactionEntity entity = new AccountTransactionEntity();
+            entity.setTitle(cursor.getString(1));
+            entities.add(entity);
+            Log.d("Read", entity.getTitle());
+        } else {
+            Log.d("Read", "No Data Found");
+        }
+
+        return entities;
     }
 
     public void updateData(String title) {
