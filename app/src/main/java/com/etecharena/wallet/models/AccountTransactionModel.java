@@ -69,7 +69,11 @@ public class AccountTransactionModel {
 
         while (cursor.moveToNext()) {
             AccountTransactionEntity entity = new AccountTransactionEntity();
+            entity.setId(cursor.getLong(0));
             entity.setTitle(cursor.getString(1));
+            entity.setType(cursor.getInt(2));
+            entity.setAmount(cursor.getInt(3));
+            entity.setTimestamp(cursor.getLong(4));
             entities.add(entity);
         }
 

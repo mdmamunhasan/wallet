@@ -33,7 +33,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset.get(position).getTitle());
+        AccountTransactionEntity mEntity = mDataset.get(position);
+        holder.mTitleView.setText(mEntity.getTitle());
+        holder.mAmountView.setText("Amount: " + mEntity.getAmount());
+        holder.mDateView.setText("Date: " + mEntity.getTimestamp());
     }
 
     @Override
@@ -42,11 +45,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextView;
+        public TextView mTitleView;
+        public TextView mAmountView;
+        public TextView mDateView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.transaction_title);
+            mTitleView = (TextView) itemView.findViewById(R.id.transaction_title);
+            mAmountView = (TextView) itemView.findViewById(R.id.transaction_amount);
+            mDateView = (TextView) itemView.findViewById(R.id.transaction_timestamp);
         }
     }
 }
