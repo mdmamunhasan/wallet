@@ -12,6 +12,7 @@
         card_view:cardCornerRadius="4dp">
 
         <LinearLayout
+            android:id="@+id/transaction_card"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#ff0000"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.models.AccountTransactionEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position) {
         AccountTransactionEntity mEntity = mDataset.get(position);
+
         holder.mTitleView.setText(mEntity.getTitle());
         holder.mAmountView.setText("Tk" + mEntity.getAmount());
-        holder.mDateView.setText("" + mEntity.getTimestamp());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(mEntity.getTimestamp());
+        holder.mDateView.setText(strDate);
     }
 
     @Override
