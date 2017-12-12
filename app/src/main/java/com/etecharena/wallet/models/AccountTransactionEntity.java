@@ -28,7 +28,7 @@ public class AccountTransactionEntity {
     }
 
     public void setType(Integer type) {
-        this.title = title;
+        this.type = type;
     }
 
     public Integer getType() {
