@@ -35,8 +35,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position) {
         AccountTransactionEntity mEntity = mDataset.get(position);
         holder.mTitleView.setText(mEntity.getTitle());
-        holder.mAmountView.setText("Amount: " + mEntity.getAmount());
-        holder.mDateView.setText("Date: " + mEntity.getTimestamp());
+        holder.mAmountView.setText("Tk" + mEntity.getAmount());
+        holder.mDateView.setText("" + mEntity.getTimestamp());
     }
 
     @Override
