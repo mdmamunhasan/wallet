@@ -4,8 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,7 +11,6 @@ import com.etecharena.wallet.R;
 import com.etecharena.wallet.models.AccountTransactionEntity;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +20,15 @@ import java.util.List;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
     private List<AccountTransactionEntity> mDataset;
+    private TransactionItemClickListener transactionItemClickListener;
 
-    public TransactionAdapter(List<AccountTransactionEntity> myDataset) {
+    public interface TransactionItemClickListener {
+        void onTransactionItemClick(View view, int position, AccountTransactionEntity entity);
+    }
+
+    public TransactionAdapter(List<AccountTransactionEntity> myDataset, TransactionItemClickListener clickListener) {
         mDataset = myDataset;
+        transactionItemClickListener = clickListener;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         return mDataset.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public LinearLayout mCardView;
         public TextView mTitleView;
         public TextView mAmountView;
@@ -68,6 +71,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             mTitleView = (TextView) itemView.findViewById(R.id.transaction_title);
             mAmountView = (TextView) itemView.findViewById(R.id.transaction_amount);
             mDateView = (TextView) itemView.findViewById(R.id.transaction_timestamp);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            AccountTransactionEntity mEntity = mDataset.get(position);
+            transactionItemClickListener.onTransactionItemClick(view, position, mEntity);
         }
     }
 }

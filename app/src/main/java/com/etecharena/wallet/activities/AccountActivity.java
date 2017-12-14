@@ -22,7 +22,7 @@ import com.etecharena.wallet.models.AccountTransactionModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity implements TransactionAdapter.TransactionItemClickListener {
 
     public SQLiteDatabase db;
     public AccountTransactionModel transactionModel;
@@ -76,7 +76,14 @@ public class AccountActivity extends AppCompatActivity {
     public void showData() {
         List<AccountTransactionEntity> mDataSet = transactionModel.getList();
         // specify an adapter (see also next example)
-        mAdapter = new TransactionAdapter(mDataSet);
+        mAdapter = new TransactionAdapter(mDataSet, this);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onTransactionItemClick(View view, int position, AccountTransactionEntity entity) {
+        finish();
+        Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
+        startActivity(accountPage);
     }
 }
