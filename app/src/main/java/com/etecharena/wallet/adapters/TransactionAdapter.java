@@ -1,6 +1,7 @@
 package com.etecharena.wallet.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             mTitleView = (TextView) itemView.findViewById(R.id.transaction_title);
             mAmountView = (TextView) itemView.findViewById(R.id.transaction_amount);
             mDateView = (TextView) itemView.findViewById(R.id.transaction_timestamp);
+            mCardView.setOnClickListener(this);
         }
 
         @Override
