@@ -17,7 +17,6 @@
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,7 +24,11 @@
             android:name=".activities.AccountActivity"
             android:label="@string/title_activity_account"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.ItemAddActivity"></activity>
+        <activity
+            android:name=".activities.ItemAddActivity"
+            android:label="@string/title_activity_item_add"
+            android:parentActivityName=".activities.AccountActivity">
+        </activity>
     </application>
 
 </manifest>

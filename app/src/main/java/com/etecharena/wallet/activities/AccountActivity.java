@@ -1,7 +1,6 @@
 package com.etecharena.wallet.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.etecharena.wallet.R;
@@ -19,7 +17,6 @@ import com.etecharena.wallet.helpers.DatabaseHelper;
 import com.etecharena.wallet.models.AccountTransactionEntity;
 import com.etecharena.wallet.models.AccountTransactionModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountActivity extends AppCompatActivity implements TransactionAdapter.TransactionItemClickListener {
@@ -50,7 +47,6 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
                 Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
                 startActivity(accountPage);
             }
@@ -82,7 +78,6 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
 
     @Override
     public void onTransactionItemClick(View view, int position, AccountTransactionEntity entity) {
-        finish();
         Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
         startActivity(accountPage);
     }
