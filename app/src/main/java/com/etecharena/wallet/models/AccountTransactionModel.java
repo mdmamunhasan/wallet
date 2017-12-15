@@ -80,14 +80,17 @@ public class AccountTransactionModel {
         return entities;
     }
 
-    public void updateData(String title) {
+    public Integer updateData(AccountTransactionEntity entity) {
         // New value for one column
         ContentValues values = new ContentValues();
-        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, title);
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, entity.getTitle());
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, entity.getType());
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT, entity.getAmount());
+        values.put(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP, entity.getTimestamp());
 
         // Which row to update, based on the title
-        String selection = WalletContract.AccountTransaction.COLUMN_NAME_TITLE + " LIKE ?";
-        String[] selectionArgs = {"MyTitle"};
+        String selection = WalletContract.AccountTransaction._ID + " = ?";
+        String[] selectionArgs = {entity.getId().toString()};
 
         int count = db.update(
                 WalletContract.AccountTransaction.TABLE_NAME,
@@ -95,6 +98,7 @@ public class AccountTransactionModel {
                 selection,
                 selectionArgs);
 
+        return count;
     }
 
     public void deleteData() {

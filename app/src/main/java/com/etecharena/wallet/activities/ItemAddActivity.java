@@ -84,8 +84,10 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mItemId = bundle.getLong(WalletContract.AccountTransaction._ID);
-            mTitleView.setText(bundle.getString(WalletContract.AccountTransaction.COLUMN_NAME_TITLE));
+            Log.d(WalletContract.AccountTransaction._ID, "id: " + mItemId);
+
             mTypeView.setSelection(bundle.getInt(WalletContract.AccountTransaction.COLUMN_NAME_TYPE));
+            mTitleView.setText(bundle.getString(WalletContract.AccountTransaction.COLUMN_NAME_TITLE));
             mAmountView.setText(String.valueOf(bundle.getInt(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT)));
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -250,11 +252,22 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             transactionEntity.setTimestamp(mDate);
 
             AccountTransactionModel transactionModel = new AccountTransactionModel(db);
-            long newRowId = transactionModel.putData(transactionEntity);
+            if(mItemId != null){
+                transactionEntity.setId(mItemId);
+                int count = transactionModel.updateData(transactionEntity);
 
-            if (newRowId > 0) {
-                Log.d("newRowId", "value = " + newRowId);
-                return true;
+                if (count > 0) {
+                    Log.d("updateRowId", "value = " + mItemId);
+                    return true;
+                }
+            }
+            else{
+                long newRowId = transactionModel.putData(transactionEntity);
+
+                if (newRowId > 0) {
+                    Log.d("newRowId", "value = " + newRowId);
+                    return true;
+                }
             }
 
             return false;
