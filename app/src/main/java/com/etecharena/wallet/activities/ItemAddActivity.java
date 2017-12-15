@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.etecharena.wallet.R;
+import com.etecharena.wallet.contracts.WalletContract;
 import com.etecharena.wallet.fragments.DatePickerFragment;
 import com.etecharena.wallet.helpers.DatabaseHelper;
 import com.etecharena.wallet.models.AccountTransactionEntity;
@@ -34,6 +35,7 @@ import java.util.Date;
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
 
     private ItemSaveTask mSaveTask = null;
+    private Long mItemId = null;
     public SQLiteDatabase db;
 
     // UI references.
@@ -78,6 +80,12 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
         mItemFormView = findViewById(R.id.item_form);
         mProgressView = findViewById(R.id.save_progress);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mItemId = bundle.getLong(WalletContract.AccountTransaction._ID);
+            mTitleView.setText(bundle.getString(WalletContract.AccountTransaction.COLUMN_NAME_TITLE));
+        }
     }
 
     @Override

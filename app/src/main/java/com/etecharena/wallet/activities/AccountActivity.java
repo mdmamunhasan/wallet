@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.adapters.TransactionAdapter;
+import com.etecharena.wallet.contracts.WalletContract;
 import com.etecharena.wallet.fragments.ItemDialogFragment;
 import com.etecharena.wallet.helpers.DatabaseHelper;
 import com.etecharena.wallet.models.AccountTransactionEntity;
@@ -79,6 +80,13 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
     @Override
     public void onTransactionItemClick(View view, int position, AccountTransactionEntity entity) {
         Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
+
+        accountPage.putExtra(WalletContract.AccountTransaction._ID, entity.getId());
+        accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, entity.getTitle());
+        accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, entity.getType());
+        accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT, entity.getAmount());
+        accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP, entity.getTimestamp());
+
         startActivity(accountPage);
     }
 }
