@@ -85,6 +85,12 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         if (bundle != null) {
             mItemId = bundle.getLong(WalletContract.AccountTransaction._ID);
             mTitleView.setText(bundle.getString(WalletContract.AccountTransaction.COLUMN_NAME_TITLE));
+            mTypeView.setSelection(bundle.getInt(WalletContract.AccountTransaction.COLUMN_NAME_TYPE));
+            mAmountView.setText(String.valueOf(bundle.getInt(WalletContract.AccountTransaction.COLUMN_NAME_AMOUNT)));
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = formatter.format(bundle.getLong(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP));
+            mDateView.setText(strDate);
         }
     }
 

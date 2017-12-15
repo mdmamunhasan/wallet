@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.etecharena.wallet.R;
@@ -80,7 +81,6 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
     @Override
     public void onTransactionItemClick(View view, int position, AccountTransactionEntity entity) {
         Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
-
         accountPage.putExtra(WalletContract.AccountTransaction._ID, entity.getId());
         accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, entity.getTitle());
         accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, entity.getType());
