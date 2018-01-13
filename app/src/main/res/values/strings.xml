@@ -21,6 +21,12 @@
     <string name="button_cancel">Cancel</string>
     <string name="prompt_pick_title">Pick date</string>
     <string name="prompt_amount">Amount</string>
+
+    <!-- Strings related to menu -->
+    <string name="last_week">Last week</string>
+    <string name="last_month">Last month</string>
+    <string name="last_year">Last year</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
