@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.etecharena.wallet.R;
 import com.etecharena.wallet.adapters.TransactionAdapter;
 import com.etecharena.wallet.contracts.WalletContract;
-import com.etecharena.wallet.fragments.ItemDialogFragment;
 import com.etecharena.wallet.helpers.DatabaseHelper;
 import com.etecharena.wallet.models.AccountTransactionEntity;
 import com.etecharena.wallet.models.AccountTransactionModel;
@@ -61,14 +62,31 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.filter_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_last_week:
+                Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+            case R.id.action_last_month:
+                Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+            case R.id.action_last_year:
+                Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+        }
+        return false;
+    }
+
+    @Override
     protected void onDestroy() {
         db.close();
         super.onDestroy();
-    }
-
-    public void showItemDialog() {
-        ItemDialogFragment itemDialog = new ItemDialogFragment();
-        itemDialog.show(getSupportFragmentManager(), "updateItem");
     }
 
     public void showData() {
