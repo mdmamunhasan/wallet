@@ -1,4 +1,4 @@
-package com.etecharena.wallet.models;
+package com.mmnhsn.wallet.models;
 
 /**
  * Created by mamun on 12/11/17.

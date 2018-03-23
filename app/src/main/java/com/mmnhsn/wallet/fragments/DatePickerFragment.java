@@ -1,4 +1,4 @@
-package com.etecharena.wallet.fragments;
+package com.mmnhsn.wallet.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

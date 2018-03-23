@@ -1,4 +1,4 @@
-package com.etecharena.wallet.contracts;
+package com.mmnhsn.wallet.contracts;
 
 import android.provider.BaseColumns;
 

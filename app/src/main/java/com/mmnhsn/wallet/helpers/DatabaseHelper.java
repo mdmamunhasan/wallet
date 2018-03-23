@@ -1,10 +1,10 @@
-package com.etecharena.wallet.helpers;
+package com.mmnhsn.wallet.helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.etecharena.wallet.contracts.WalletContract;
+import com.mmnhsn.wallet.contracts.WalletContract;
 
 /**
  * Created by mamun on 12/9/17.

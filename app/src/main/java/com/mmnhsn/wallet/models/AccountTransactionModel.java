@@ -1,10 +1,10 @@
-package com.etecharena.wallet.models;
+package com.mmnhsn.wallet.models;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.etecharena.wallet.contracts.WalletContract;
+import com.mmnhsn.wallet.contracts.WalletContract;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.etecharena.wallet.activities;
+package com.mmnhsn.wallet.activities;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.etecharena.wallet.R;
-import com.etecharena.wallet.adapters.TransactionAdapter;
-import com.etecharena.wallet.contracts.WalletContract;
-import com.etecharena.wallet.helpers.DatabaseHelper;
-import com.etecharena.wallet.models.AccountTransactionEntity;
-import com.etecharena.wallet.models.AccountTransactionModel;
+import com.mmnhsn.wallet.R;
+import com.mmnhsn.wallet.adapters.TransactionAdapter;
+import com.mmnhsn.wallet.contracts.WalletContract;
+import com.mmnhsn.wallet.helpers.DatabaseHelper;
+import com.mmnhsn.wallet.models.AccountTransactionEntity;
+import com.mmnhsn.wallet.models.AccountTransactionModel;
 
 import java.util.List;
 

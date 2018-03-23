@@ -1,4 +1,4 @@
-package com.etecharena.wallet.activities;
+package com.mmnhsn.wallet.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,8 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.etecharena.wallet.R;
-import com.etecharena.wallet.helpers.PreferenceHelper;
+import com.mmnhsn.wallet.R;
+import com.mmnhsn.wallet.helpers.PreferenceHelper;
 
 public class MainActivity extends AppCompatActivity {
 

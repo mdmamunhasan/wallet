@@ -1,8 +1,8 @@
-package com.etecharena.wallet.helpers;
+package com.mmnhsn.wallet.helpers;
 
 import android.content.Context;
 
-import com.etecharena.wallet.utils.PreferenceUtil;
+import com.mmnhsn.wallet.utils.PreferenceUtil;
 
 /**
  * Created by mamun on 12/2/17.

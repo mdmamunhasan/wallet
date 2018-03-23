@@ -1,4 +1,4 @@
-package com.etecharena.wallet.adapters;
+package com.mmnhsn.wallet.adapters;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.etecharena.wallet.R;
-import com.etecharena.wallet.models.AccountTransactionEntity;
+import com.mmnhsn.wallet.R;
+import com.mmnhsn.wallet.models.AccountTransactionEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

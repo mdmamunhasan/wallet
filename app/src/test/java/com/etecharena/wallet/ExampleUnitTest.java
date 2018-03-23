@@ -1,4 +1,4 @@
-package com.etecharena.wallet;
+package com.mmnhsn.wallet;
 
 import org.junit.Test;
 

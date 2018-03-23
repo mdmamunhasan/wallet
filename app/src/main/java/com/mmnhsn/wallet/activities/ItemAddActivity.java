@@ -1,4 +1,4 @@
-package com.etecharena.wallet.activities;
+package com.mmnhsn.wallet.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,12 +19,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.etecharena.wallet.R;
-import com.etecharena.wallet.contracts.WalletContract;
-import com.etecharena.wallet.fragments.DatePickerFragment;
-import com.etecharena.wallet.helpers.DatabaseHelper;
-import com.etecharena.wallet.models.AccountTransactionEntity;
-import com.etecharena.wallet.models.AccountTransactionModel;
+import com.mmnhsn.wallet.R;
+import com.mmnhsn.wallet.contracts.WalletContract;
+import com.mmnhsn.wallet.fragments.DatePickerFragment;
+import com.mmnhsn.wallet.helpers.DatabaseHelper;
+import com.mmnhsn.wallet.models.AccountTransactionEntity;
+import com.mmnhsn.wallet.models.AccountTransactionModel;
 
 import java.text.DateFormat;
 import java.text.ParsePosition;

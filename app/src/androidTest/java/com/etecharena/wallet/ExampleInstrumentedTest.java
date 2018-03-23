@@ -1,4 +1,4 @@
-package com.etecharena.wallet;
+package com.mmnhsn.wallet;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.etecharena.wallet", appContext.getPackageName());
+        assertEquals("com.mmnhsn.wallet", appContext.getPackageName());
     }
 }

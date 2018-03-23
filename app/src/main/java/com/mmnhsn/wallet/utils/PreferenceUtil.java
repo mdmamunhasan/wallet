@@ -1,4 +1,4 @@
-package com.etecharena.wallet.utils;
+package com.mmnhsn.wallet.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
