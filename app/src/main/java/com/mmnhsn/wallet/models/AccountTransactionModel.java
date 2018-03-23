@@ -36,7 +36,7 @@ public class AccountTransactionModel {
         return newRowId;
     }
 
-    public List<AccountTransactionEntity> getList() {
+    public List<AccountTransactionEntity> getList(long timestamp) {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
@@ -49,7 +49,7 @@ public class AccountTransactionModel {
 
         // Filter results WHERE "title" = 'My Title'
         String selection = WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP + " > ?";
-        String[] selectionArgs = {"0"};
+        String[] selectionArgs = {String.valueOf(timestamp)};
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
@@ -58,8 +58,8 @@ public class AccountTransactionModel {
         Cursor cursor = db.query(
                 WalletContract.AccountTransaction.TABLE_NAME,                     // The table to query
                 projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order

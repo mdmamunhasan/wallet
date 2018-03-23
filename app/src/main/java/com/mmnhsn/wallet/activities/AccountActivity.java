@@ -21,15 +21,13 @@ import com.mmnhsn.wallet.helpers.DatabaseHelper;
 import com.mmnhsn.wallet.models.AccountTransactionEntity;
 import com.mmnhsn.wallet.models.AccountTransactionModel;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class AccountActivity extends AppCompatActivity implements TransactionAdapter.TransactionItemClickListener {
 
     public SQLiteDatabase db;
     public AccountTransactionModel transactionModel;
-
-    private long totalCredit = 0;
-    private long totalDebit = 0;
 
     // UI references.
     private RecyclerView mRecyclerView;
@@ -67,7 +65,7 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
         db = new DatabaseHelper(this).getWritableDatabase();
         transactionModel = new AccountTransactionModel(db);
 
-        showData();
+        showData(0);
     }
 
     @Override
@@ -78,14 +76,21 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Calendar cal = Calendar.getInstance();
         switch (item.getItemId()) {
             case R.id.action_last_week:
+                cal.add(Calendar.DATE, -7);
+                showData(cal.getTimeInMillis());
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG).show();
                 break;
             case R.id.action_last_month:
+                cal.add(Calendar.DATE, -30);
+                showData(cal.getTimeInMillis());
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG).show();
                 break;
             case R.id.action_last_year:
+                cal.add(Calendar.DATE, -365);
+                showData(cal.getTimeInMillis());
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_LONG).show();
                 break;
         }
@@ -98,9 +103,11 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
         super.onDestroy();
     }
 
-    public void showData() {
-        List<AccountTransactionEntity> mDataSet = transactionModel.getList();
+    public void showData(long timestamp) {
+        List<AccountTransactionEntity> mDataSet = transactionModel.getList(timestamp);
 
+        long totalCredit = 0;
+        long totalDebit = 0;
         for (int i = 0; i < mDataSet.size(); i++) {
             if (mDataSet.get(i).getType() > 0) {
                 totalCredit = totalCredit + mDataSet.get(i).getAmount();
