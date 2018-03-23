@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mmnhsn.wallet.R;
 import com.mmnhsn.wallet.contracts.WalletContract;
@@ -31,13 +30,11 @@ import com.mmnhsn.wallet.helpers.DatabaseHelper;
 import com.mmnhsn.wallet.models.AccountTransactionEntity;
 import com.mmnhsn.wallet.models.AccountTransactionModel;
 
-import java.text.DateFormat;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
+public class ActionActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
 
     private ItemSaveTask mSaveTask = null;
     private ItemDeleteTask mDeleteTask = null;
@@ -55,7 +52,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_add);
+        setContentView(R.layout.activity_action);
 
         db = new DatabaseHelper(this).getWritableDatabase();
 
@@ -333,7 +330,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
             if (success) {
                 finish();
-                Intent accountPage = new Intent(ItemAddActivity.this, AccountActivity.class);
+                Intent accountPage = new Intent(ActionActivity.this, ContentActivity.class);
                 startActivity(accountPage);
             } else {
                 mAmountView.setError(getString(R.string.error_invalid_amount));
@@ -365,7 +362,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             showProgress(false);
 
             finish();
-            Intent accountPage = new Intent(ItemAddActivity.this, AccountActivity.class);
+            Intent accountPage = new Intent(ActionActivity.this, ContentActivity.class);
             startActivity(accountPage);
         }
 

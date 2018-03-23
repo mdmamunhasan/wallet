@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (success) {
                 finish();
-                Intent accountPage = new Intent(MainActivity.this, AccountActivity.class);
+                Intent accountPage = new Intent(MainActivity.this, ContentActivity.class);
                 startActivity(accountPage);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

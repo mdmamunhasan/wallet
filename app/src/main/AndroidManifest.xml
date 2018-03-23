@@ -21,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.AccountActivity"
+            android:name=".activities.ContentActivity"
             android:label="@string/title_activity_account"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.ItemAddActivity"
+            android:name=".activities.ActionActivity"
             android:label="@string/title_activity_item_add"
-            android:parentActivityName=".activities.AccountActivity">
+            android:parentActivityName=".activities.ContentActivity">
         </activity>
     </application>
 

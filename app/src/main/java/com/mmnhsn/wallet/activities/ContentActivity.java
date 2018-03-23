@@ -24,7 +24,7 @@ import com.mmnhsn.wallet.models.AccountTransactionModel;
 import java.util.Calendar;
 import java.util.List;
 
-public class AccountActivity extends AppCompatActivity implements TransactionAdapter.TransactionItemClickListener {
+public class ContentActivity extends AppCompatActivity implements TransactionAdapter.TransactionItemClickListener {
 
     public SQLiteDatabase db;
     public AccountTransactionModel transactionModel;
@@ -39,7 +39,7 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
+        setContentView(R.layout.activity_content);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +57,7 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
+                Intent accountPage = new Intent(ContentActivity.this, ActionActivity.class);
                 startActivity(accountPage);
             }
         });
@@ -66,7 +66,7 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
         transactionModel = new AccountTransactionModel(db);
 
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, -7);
+        cal.add(Calendar.DATE, -365);
         showData(cal.getTimeInMillis());
     }
 
@@ -128,7 +128,7 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
 
     @Override
     public void onTransactionItemClick(View view, int position, AccountTransactionEntity entity) {
-        Intent accountPage = new Intent(AccountActivity.this, ItemAddActivity.class);
+        Intent accountPage = new Intent(ContentActivity.this, ActionActivity.class);
         accountPage.putExtra(WalletContract.AccountTransaction._ID, entity.getId());
         accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TITLE, entity.getTitle());
         accountPage.putExtra(WalletContract.AccountTransaction.COLUMN_NAME_TYPE, entity.getType());

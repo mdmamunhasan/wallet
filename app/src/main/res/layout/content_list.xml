@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.mmnhsn.wallet.activities.AccountActivity"
-    tools:showIn="@layout/activity_account">
+    tools:context="com.mmnhsn.wallet.activities.ContentActivity"
+    tools:showIn="@layout/activity_content">
 
     <LinearLayout
         android:id="@+id/transaction_header"
