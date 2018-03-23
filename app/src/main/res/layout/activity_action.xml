@@ -31,12 +31,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/amount_type"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/amount_type_array"
-                android:prompt="@string/prompt_amount_type" />
+                android:layout_marginBottom="8dp"
+                android:background="#cacaca"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/amount_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/amount_type_array"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:prompt="@string/prompt_amount_type" />
+            </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
