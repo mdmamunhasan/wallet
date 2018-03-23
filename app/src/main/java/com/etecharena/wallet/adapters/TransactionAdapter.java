@@ -1,5 +1,6 @@
 package com.etecharena.wallet.adapters;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,7 +52,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
 
         if (mEntity.getType() != null && mEntity.getType() > 0) {
-            holder.mCardView.setBackgroundColor(0xFF00FF00);
+            holder.mCardView.setBackgroundColor(Color.parseColor("#4CAF50"));
         }
     }
 
