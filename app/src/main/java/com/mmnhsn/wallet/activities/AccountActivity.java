@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mmnhsn.wallet.R;
@@ -27,10 +28,15 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
     public SQLiteDatabase db;
     public AccountTransactionModel transactionModel;
 
+    private long totalCredit = 0;
+    private long totalDebit = 0;
+
     // UI references.
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private TextView mTotalCredit;
+    private TextView mTotalDebit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,9 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mTotalCredit = findViewById(R.id.total_credit);
+        mTotalDebit = findViewById(R.id.total_debit);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_transactions);
         mRecyclerView.setHasFixedSize(true);
@@ -91,6 +100,18 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
 
     public void showData() {
         List<AccountTransactionEntity> mDataSet = transactionModel.getList();
+
+        for (int i = 0; i < mDataSet.size(); i++) {
+            if (mDataSet.get(i).getType() > 0) {
+                totalCredit = totalCredit + mDataSet.get(i).getAmount();
+            } else {
+                totalDebit = totalDebit + mDataSet.get(i).getAmount();
+            }
+        }
+
+        mTotalCredit.setText(String.valueOf(totalCredit));
+        mTotalDebit.setText(String.valueOf(totalDebit));
+
         // specify an adapter (see also next example)
         mAdapter = new TransactionAdapter(mDataSet, this);
         mRecyclerView.setAdapter(mAdapter);
