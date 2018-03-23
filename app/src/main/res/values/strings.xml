@@ -21,6 +21,8 @@
     <string name="button_cancel">Cancel</string>
     <string name="prompt_pick_title">Pick date</string>
     <string name="prompt_amount">Amount</string>
+    <string name="label_credit">Total Credit</string>
+    <string name="label_debit">total Debit</string>
 
     <!-- Strings related to menu -->
     <string name="last_week">Last week</string>
