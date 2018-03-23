@@ -1,8 +1,4 @@
-## About
-
-This is a basic android app to store history for daily money transactions.
-
-## Feature
+## Feature List
 
 - Login
 - Add/Update/Delete Transactions
