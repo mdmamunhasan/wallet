@@ -83,6 +83,8 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            setTitle("Update Transaction");
+
             mItemId = bundle.getLong(WalletContract.AccountTransaction._ID);
             Log.d(WalletContract.AccountTransaction._ID, "id: " + mItemId);
 
