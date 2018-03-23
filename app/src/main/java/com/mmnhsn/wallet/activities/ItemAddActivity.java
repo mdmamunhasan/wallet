@@ -12,12 +12,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mmnhsn.wallet.R;
 import com.mmnhsn.wallet.contracts.WalletContract;
@@ -35,6 +38,7 @@ import java.util.Date;
 public class ItemAddActivity extends AppCompatActivity implements DatePickerFragment.DatePickerFragmentListener {
 
     private ItemSaveTask mSaveTask = null;
+    private ItemDeleteTask mDeleteTask = null;
     private Long mItemId = null;
     public SQLiteDatabase db;
 
@@ -96,6 +100,31 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             String strDate = formatter.format(bundle.getLong(WalletContract.AccountTransaction.COLUMN_NAME_TIMESTAMP));
             mDateView.setText(strDate);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        if (mItemId != null) {
+            getMenuInflater().inflate(R.menu.action_menu, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.save_menu, menu);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save_item:
+                saveItem();
+                break;
+            case R.id.action_delete_item:
+                deleteItem();
+                break;
+        }
+        return false;
     }
 
     @Override
@@ -179,6 +208,16 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         }
     }
 
+    public void deleteItem() {
+        if (mDeleteTask != null) {
+            return;
+        }
+
+        showProgress(true);
+        mDeleteTask = new ItemDeleteTask();
+        mDeleteTask.execute((Void) null);
+    }
+
     private boolean isDateValid(String date) {
         //TODO: Replace this with your own logic
         return date.contains("/");
@@ -254,7 +293,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             transactionEntity.setTimestamp(mDate);
 
             AccountTransactionModel transactionModel = new AccountTransactionModel(db);
-            if(mItemId != null){
+            if (mItemId != null) {
                 transactionEntity.setId(mItemId);
                 int count = transactionModel.updateData(transactionEntity);
 
@@ -262,8 +301,7 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
                     Log.d("updateRowId", "value = " + mItemId);
                     return true;
                 }
-            }
-            else{
+            } else {
                 long newRowId = transactionModel.putData(transactionEntity);
 
                 if (newRowId > 0) {
@@ -293,6 +331,34 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
         @Override
         protected void onCancelled() {
             mSaveTask = null;
+            showProgress(false);
+        }
+    }
+
+
+    public class ItemDeleteTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            Log.d("Item ID", mItemId.toString());
+
+            AccountTransactionModel transactionModel = new AccountTransactionModel(db);
+            transactionModel.deleteData(mItemId);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mDeleteTask = null;
+            showProgress(false);
+
+            finish();
+            Intent accountPage = new Intent(ItemAddActivity.this, AccountActivity.class);
+            startActivity(accountPage);
+        }
+
+        @Override
+        protected void onCancelled() {
+            mDeleteTask = null;
             showProgress(false);
         }
     }

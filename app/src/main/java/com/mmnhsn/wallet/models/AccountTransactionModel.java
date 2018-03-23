@@ -101,11 +101,11 @@ public class AccountTransactionModel {
         return count;
     }
 
-    public void deleteData() {
+    public void deleteData(long itemId) {
         // Define 'where' part of query.
-        String selection = WalletContract.AccountTransaction.COLUMN_NAME_TITLE + " LIKE ?";
+        String selection = WalletContract.AccountTransaction._ID + " = ?";
         // Specify arguments in placeholder order.
-        String[] selectionArgs = {"MyTitle"};
+        String[] selectionArgs = {String.valueOf(itemId)};
         // Issue SQL statement.
         db.delete(WalletContract.AccountTransaction.TABLE_NAME, selection, selectionArgs);
     }
