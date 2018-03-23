@@ -3,10 +3,12 @@ package com.mmnhsn.wallet.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -213,9 +215,20 @@ public class ItemAddActivity extends AppCompatActivity implements DatePickerFrag
             return;
         }
 
-        showProgress(true);
-        mDeleteTask = new ItemDeleteTask();
-        mDeleteTask.execute((Void) null);
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm")
+                .setMessage("Do you really want to delete this transaction?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        showProgress(true);
+                        mDeleteTask = new ItemDeleteTask();
+                        mDeleteTask.execute((Void) null);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+
+
     }
 
     private boolean isDateValid(String date) {

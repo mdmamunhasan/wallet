@@ -39,7 +39,7 @@
 
     <string name="prompt_amount_type">Choose a type</string>
     <string-array name="amount_type_array">
-        <item>Cost</item>
-        <item>Income</item>
+        <item>Debit</item>
+        <item>Credit</item>
     </string-array>
 </resources>
