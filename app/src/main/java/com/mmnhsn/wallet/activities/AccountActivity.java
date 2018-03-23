@@ -65,7 +65,9 @@ public class AccountActivity extends AppCompatActivity implements TransactionAda
         db = new DatabaseHelper(this).getWritableDatabase();
         transactionModel = new AccountTransactionModel(db);
 
-        showData(0);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -7);
+        showData(cal.getTimeInMillis());
     }
 
     @Override
